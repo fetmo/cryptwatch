@@ -1,0 +1,7 @@
+RewriteEngine On
+RewriteBase /
+
+Deny from all
+
+# Disable directory browsing
+Options All -Indexes

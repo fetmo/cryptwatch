@@ -1,0 +1,83 @@
+.crypto-container-template {
+    clear: both;
+    margin: 0 auto 50px;
+    overflow: auto;
+    width: 500px;
+}
+
+.crypto-template:last-child {
+    margin-right: 0;
+}
+
+.crypto-template .crypto-template-title {
+    font-weight: bold;
+    border-bottom: 1px dotted black;
+}
+
+.crypto-template input {
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.crypto-template-actions {
+    height: auto;
+}
+
+.crypto-template-save {
+    border: 1px solid black;
+    border-radius: 3px;
+    cursor: pointer;
+    display: inline-block;
+    background: #E5E5E5;
+    margin-top: 10px;
+    padding: 5px;
+}
+
+.crypto-template, .crypto-currency, .crypto-mining-currency {
+    border: 1px solid black;
+    box-sizing: border-box;
+    float: left;
+    margin-top: 10px;
+    margin-right: 20px;
+    padding: 10px;
+    width: 150px;
+}
+
+.crypto-currency-wallet{
+    position: absolute;
+    top: 20px;
+    right: 150px;
+}
+
+.crypto-currency, .crypto-mining-currency {
+    width: 200px;
+}
+
+.crypto-container, .crypto-mining-container, .crypto-wallet-container {
+    margin: 0 auto;
+    overflow: auto;
+    width: 700px;
+}
+
+.crypto-template:last-child, .crypto-currency:last-child, .crypto-mining-currency:last-child {
+    margin-right: 0;
+}
+
+.crypto-currency-title, .crypto-mining-currency-title {
+    font-weight: bold;
+    border-bottom: 1px dotted black;
+}
+
+.crypto-currency-input-label, .crypto-mining-currency-input-label {
+    display: block;
+    margin: 5px 0;
+}
+
+.crypt-currency-value, .crypt-currency-hashrate, .crypt-currency-balance {
+    float: right;
+}
+
+input {
+    box-sizing: border-box;
+    width: 100%;
+}

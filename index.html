@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Crypt Watch</title>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="jquery.crypto-ticker.js"></script>
+    <script src="jquery.crypto-amount-ticker.js"></script>
+    <script src="jquery.mining-ticker.js"></script>
+    <script src="jquery.mining-observer.js"></script>
+    <script src="jquery.wallet.js"></script>
+    <script src="jquery.wallet-ticker.js"></script>
+    <script src="jquery.wallet-observer.js"></script>
+    <script src="scripts.js"></script>
+
+    <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<div class="crypto-container-template">
+    <div class="crypto-template" data-amount-ticker="true">
+        <div class="crypto-template-title">
+            Ticker
+        </div>
+        <div class="crypto-template-select">
+            <label for="ticker-currency">
+                Currency
+            </label>
+            <select name="currency" id="ticker-currency" class="crypto-template-select-box">
+                <option value="ETH">ETH</option>
+                <option value="DASH">DASH</option>
+                <option value="BTC">Bitcoin</option>
+                <option value="SC">Siacoin</option>
+                <option value="ZEC">Zcash</option>
+                <option value="ZEN">ZEN</option>
+                <option value="LTC">Litecoin</option>
+                <option value="LSK">Lisk</option>
+            </select>
+        </div>
+        <div class="crypto-template-amount">
+            <label for="ticker-currency-amount">
+                Amount:
+            </label>
+            <input type="text" name="currency-amount" id="ticker-currency-amount" class="crypto-template-amount-box">
+        </div>
+        <div class="crypto-template-actions">
+            <span class="crypto-template-save">Save</span>
+        </div>
+    </div>
+    <div class="crypto-template" data-wallet-observer="true">
+        <div class="crypto-template-title">
+            Wallet
+        </div>
+        <div class="crypto-template-select">
+            <label for="wallet-currency">
+                Currency
+            </label>
+            <select name="wallet-currency" id="wallet-currency" class="crypto-template-select-box">
+                <option value="ETH">ETH</option>
+                <option value="DASH">DASH</option>
+                <option value="BTC">Bitcoin</option>
+                <option value="SC">Siacoin</option>
+                <option value="ZEC">Zcash</option>
+                <option value="ZEN">ZEN</option>
+                <option value="LTC">Litecoin</option>
+                <option value="LSK">Lisk</option>
+            </select>
+        </div>
+        <div class="crypto-template-wallet">
+            <label for="wallet-address">
+                Wallet:
+            </label>
+            <input type="text" name="wallet-address" id="wallet-address" class="crypto-template-wallet-box">
+        </div>
+        <div class="crypto-template-actions">
+            <span class="crypto-template-save">Save</span>
+        </div>
+    </div>
+    <div class="crypto-template" data-mining-observer="true">
+        <div class="crypto-template-title">
+            Mining
+        </div>
+        <div class="crypto-template-select">
+            <label for="mining-currency">
+                Currency-Pool
+            </label>
+            <select name="mining-currency" id="mining-currency" class="crypto-template-select-currency">
+                <optgroup label="Nanopool">
+                    <option value="nanopool-ETH">ETH</option>
+                    <option value="nanopool-SIA">Siacoin</option>
+                    <option value="nanopool-ZEC">Zcash</option>
+                </optgroup>
+                <optgroup label="Siamining">
+                    <option value="siamining-SIA">Siacoin</option>
+                </optgroup>
+                <optgroup label="Nicehash">
+                    <option value="nicehash-BTC">Bitcoin</option>
+                </optgroup>
+                <optgroup label="Zenmine">
+                    <option value="zenmine-ZEN">ZEN</option>
+                </optgroup>
+            </select>
+        </div>
+        <div class="crypto-template-mining">
+            <label for="mining-address">
+                Address:
+            </label>
+            <input type="text" name="mining-address" id="mining-address" class="crypto-template-wallet-box">
+        </div>
+        <div class="crypto-template-actions">
+            <span class="crypto-template-save">Save</span>
+        </div>
+    </div>
+</div>
+
+<script>
+    window.walletTemplate =
+        '<div class="crypto-currency-wallet">' +
+            '<div class="crypto-currency-title">Total Wallet Value</div>' +
+            '<div class="crypto-currency-body">' +
+                '<label class="crypto-currency-input-label">' +
+                    'USD:' +
+                    '<span class="crypt-currency-value crypt-currency-usd-value"></span>' +
+                '</label>' +
+                '<label class="crypto-currency-input-label">' +
+                    'EUR:' +
+                    '<span class="crypt-currency-value crypt-currency-eur-value"></span>' +
+                '</label>' +
+                '<label class="crypto-currency-input-label">' +
+                    'BTC:' +
+                    '<span class="crypt-currency-value crypt-currency-btc-value"></span>' +
+                '</label>' +
+            '</div>' +
+        '</div>';
+
+    window.currencyCryptoContainer =
+        '<div class="crypto-currency" data-currency-ticker="true" data-currency="ETH">' +
+            '<div class="crypto-currency-title"></div>' +
+            '<div class="crypto-currency-body">' +
+                '<label class="crypto-currency-input-label">' +
+                    'Amount:' +
+                    '<input type="text" class="crypt-currency-input"/>' +
+                '</label>' +
+                '<label class="crypto-currency-input-label">' +
+                    'USD:' +
+                    '<span class="crypt-currency-value crypt-currency-usd-value"></span>' +
+                '</label>' +
+                '<label class="crypto-currency-input-label">' +
+                    'EUR:' +
+                    '<span class="crypt-currency-value crypt-currency-eur-value"></span>' +
+                '</label>' +
+                '<label class="crypto-currency-input-label">' +
+                    'BTC:' +
+                    '<span class="crypt-currency-value crypt-currency-btc-value"></span>' +
+                '</label>' +
+            '</div>' +
+        '</div>';
+
+    window.walletContainer =
+        '<div class="crypto-currency" data-currency="ETH">' +
+            '<div class="crypto-currency-title"></div>' +
+            '<div class="crypto-currency-body">' +
+                '<label class="crypto-currency-input-label">' +
+                    'Amount:' +
+                    '<input type="text" class="crypt-currency-input" readonly/>' +
+                '</label>' +
+                    '<label class="crypto-currency-input-label">' +
+                    'USD:' +
+                    '<span class="crypt-currency-value crypt-currency-usd-value"></span>' +
+                '</label>' +
+                    '<label class="crypto-currency-input-label">' +
+                    'EUR:' +
+                    '<span class="crypt-currency-value crypt-currency-eur-value"></span>' +
+                '</label>' +
+                '<label class="crypto-currency-input-label">' +
+                    'BTC:' +
+                    '<span class="crypt-currency-value crypt-currency-btc-value"></span>' +
+                '</label>' +
+            '</div>' +
+        '</div>';
+
+    window.miningContainer =
+        '<div class="crypto-mining-currency" data-mining-ticker="true">' +
+            '<div class="crypto-mining-currency-title"></div>' +
+            '<div class="crypto-mining-currency-body">' +
+                '<label class="crypto-mining-currency-input-label">' +
+                    'Hashrate:' +
+                    '<span class="crypt-currency-hashrate"></span>' +
+                '</label>' +
+                '<label class="crypto-mining-currency-input-label">' +
+                    'Unpaid Balance:' +
+                    '<span class="crypt-currency-balance"></span>' +
+                '</label>' +
+            '</div>' +
+        '</div>';
+</script>
+
+<div class="crypto-container">
+</div>
+
+<div class="crypto-wallet-container">
+</div>
+
+<div class="crypto-mining-container">
+</div>
+
+</body>
+</html>
