@@ -3,7 +3,7 @@ $.fn.walletObserver = function () {
         var pH = {
             'ETH': 'https://ethplorer.io/service/service.php?data=',
             'ZEC': 'https://api.zcha.in/v2/mainnet/accounts/',
-            'ZEN': 'https://explorer.zensystem.io/insight-api-zen/addr/',
+            'ZEN': 'https://explorer.zen-solutions.io/api/addr/',
             'DASH': 'https://api.blockcypher.com/v1/dash/main/addrs/',
             'BTC': 'https://api.blockcypher.com/v1/btc/main/addrs/',
             'SC': 'https://explorer.siahub.info/api/hash/',
@@ -78,12 +78,13 @@ $.fn.walletObserver = function () {
                 }
             },
 
-            createWalletTicker: function (url, currency) {
+            createWalletTicker: function (url, currency, key) {
                 var me = this,
                     element = $(window.walletContainer);
 
                 element.attr('data-url', url);
                 element.attr('data-currency', currency);
+                element.attr('data-key', key);
 
                 me._$walletContainer.append(element);
                 element.walletTicker();
@@ -163,7 +164,7 @@ $.fn.walletObserver = function () {
                     Object.getOwnPropertyNames(walletWallets).forEach(function (key) {
                         var set = walletWallets[key];
 
-                        me.createWalletTicker(set.url, set.currency);
+                        me.createWalletTicker(set.url, set.currency, key);
                     });
                 }
             }

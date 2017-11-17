@@ -49,6 +49,12 @@
     right: 150px;
 }
 
+.crypto-wallet-clear {
+    float: right;
+    font-family: cursive;
+    font-size: 12px;
+}
+
 .crypto-currency, .crypto-mining-currency {
     width: 200px;
 }

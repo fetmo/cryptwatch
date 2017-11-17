@@ -6,7 +6,8 @@ $.fn.walletTicker = function () {
                 'url': '',
                 'currencySelector': '.crypt-currency-input',
                 'containerSelector': '.crypto-wallet-container',
-                'titleSelector': '.crypto-currency-title'
+                'titleSelector': '.crypto-currency-title',
+                'key': ''
             },
 
             init: function (elem) {
@@ -18,11 +19,37 @@ $.fn.walletTicker = function () {
                 me._$title = $(me.options.titleSelector, me._$container);
                 me._$walletContainer = $(me.options.containerSelector);
 
-                me._$title.text('Wallet ' + me.options.currency);
+                me._$title.html('Wallet ' + me.options.currency + ' <span class="crypto-wallet-clear">X</span>');
+                me._$delete = $('.crypto-wallet-clear', me._$title);
+
+                me._$delete.on('click', $.proxy(me.deleteElement, me));
 
                 me.callApi();
 
                 setInterval($.proxy(me.callApi, me), 120000);
+            },
+
+            deleteElement: function () {
+                var me = this;
+
+
+            },
+
+            clearFromStorage: function (key) {
+                var me = this,
+                    walletWallets = me._storage.getItem('wallet-wallets') || '';
+
+                if (walletWallets !== '') {
+                    walletWallets = JSON.parse(walletWallets);
+
+                    Object.getOwnPropertyNames(walletWallets).forEach(function (index) {
+                        if(index === key){
+                            walletWallets[index] = null;
+                        }
+                    });
+
+                    me._storage.setItem('wallet-wallets', JSON.stringify(walletWallets));
+                }
             },
 
             callApi: function () {
